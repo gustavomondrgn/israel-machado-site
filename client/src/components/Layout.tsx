@@ -1,0 +1,233 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
+import { Menu, X, Phone, Instagram } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const WHATSAPP_LINK = "https://wa.me/5554999141101?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.";
+
+const navItems = [
+  { label: "Início", href: "/" },
+  { label: "Psicologia Científica", href: "/psicologia-cientifica" },
+  { label: "Ensaios", href: "/ensaios" },
+  { label: "Serviços", href: "/servicos" },
+  { label: "Depoimentos", href: "/depoimentos" },
+];
+
+export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
+  // Determine if we're on a dark-hero page (ensaios and area detail pages have dark backgrounds)
+  const isDarkPage = location === "/" || location === "/ensaios" || location.startsWith("/ensaios/") || location.startsWith("/area/") || location === "/servicos" || location === "/psicologia-cientifica";
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-ivory/95 backdrop-blur-md shadow-[0_1px_0_0_oklch(0.88_0.02_75)]"
+          : isDarkPage
+            ? "bg-night/60 backdrop-blur-sm"
+            : "bg-transparent"
+      }`}
+    >
+      <nav className="container flex items-center justify-between py-4 lg:py-5">
+        <Link href="/" className="group">
+          <div className="flex flex-col">
+            <span className={`font-display text-xl lg:text-2xl font-semibold tracking-wide transition-colors duration-500 ${
+              scrolled ? "text-foreground" : isDarkPage ? "text-warm-100" : "text-foreground"
+            }`}>
+              Israel Machado
+            </span>
+            <span className={`font-sans text-[10px] lg:text-xs tracking-[0.25em] uppercase transition-colors duration-500 ${
+              scrolled ? "text-muted-foreground" : isDarkPage ? "text-warm-400" : "text-muted-foreground"
+            }`}>
+              Psicólogo Clínico
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop nav */}
+        <div className="hidden lg:flex items-center gap-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`font-sans text-sm tracking-wide transition-colors duration-300 hover:text-marsala ${
+                location === item.href
+                  ? scrolled
+                    ? "text-marsala font-medium"
+                    : isDarkPage
+                      ? "text-bronze-light font-medium"
+                      : "text-marsala font-medium"
+                  : scrolled
+                    ? "text-foreground/70"
+                    : isDarkPage
+                      ? "text-warm-200 hover:text-warm-100"
+                      : "text-foreground/70"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <a
+            href={WHATSAPP_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-marsala text-primary-foreground font-sans text-sm tracking-wide rounded-sm hover:bg-marsala-light transition-colors duration-300"
+          >
+            <Phone className="w-3.5 h-3.5" />
+            Agendar
+          </a>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`lg:hidden p-2 transition-colors duration-500 ${
+            scrolled ? "text-foreground" : isDarkPage ? "text-warm-100" : "text-foreground"
+          }`}
+          aria-label="Menu"
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden bg-ivory/98 backdrop-blur-md border-t border-border overflow-hidden"
+          >
+            <div className="container py-6 flex flex-col gap-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`font-sans text-base py-2 transition-colors ${
+                    location === item.href
+                      ? "text-marsala font-medium"
+                      : "text-foreground/70"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-marsala text-primary-foreground font-sans text-sm tracking-wide rounded-sm mt-2"
+              >
+                <Phone className="w-4 h-4" />
+                Agendar Consulta
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer className="bg-night text-warm-200 pt-16 pb-8">
+      <div className="container">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          {/* Brand */}
+          <div>
+            <h3 className="font-display text-2xl font-semibold text-warm-100 mb-3">
+              Israel Machado
+            </h3>
+            <p className="font-sans text-xs tracking-[0.2em] uppercase text-warm-400 mb-4">
+              Psicólogo Clínico &middot; CRP 07/43950
+            </p>
+            <p className="font-body text-sm text-warm-300 leading-relaxed">
+              Psicoterapia psicanalítica. Atendimento presencial e online.
+            </p>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h4 className="font-sans text-xs tracking-[0.2em] uppercase text-bronze mb-4">
+              Navegação
+            </h4>
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="font-sans text-sm text-warm-300 hover:text-warm-100 transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="font-sans text-xs tracking-[0.2em] uppercase text-bronze mb-4">
+              Contato
+            </h4>
+            <div className="flex flex-col gap-3 font-sans text-sm text-warm-300">
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-warm-100 transition-colors flex items-center gap-2"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                (54) 99914-1101
+              </a>
+              <a
+                href="https://www.instagram.com/israelkmachado"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-warm-100 transition-colors flex items-center gap-2"
+              >
+                <Instagram className="w-3.5 h-3.5" />
+                @israelkmachado
+              </a>
+              <p className="text-warm-400 text-xs mt-2">Passo Fundo, RS</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-warm-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="font-sans text-xs text-warm-500">
+            &copy; {new Date().getFullYear()} Israel Machado. Todos os direitos reservados.
+          </p>
+          <p className="font-sans text-xs text-warm-600">
+            CRP 07/43950
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1">{children}</main>
+      <Footer />
+    </div>
+  );
+}
