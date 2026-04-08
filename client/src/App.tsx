@@ -9,6 +9,8 @@ import AreaDetail from "./pages/AreaDetail";
 import Ensaios from "./pages/Ensaios";
 import EnsaioAntigona from "./pages/EnsaioAntigona";
 import PsicologiaCientifica from "./pages/PsicologiaCientifica";
+import Artigo from "./pages/Artigo";
+import TagPage from "./pages/TagPage";
 import Servicos from "./pages/Servicos";
 import Depoimentos from "./pages/Depoimentos";
 
@@ -20,6 +22,8 @@ function Router() {
       <Route path="/ensaios" component={Ensaios} />
       <Route path="/ensaios/antigona" component={EnsaioAntigona} />
       <Route path="/psicologia-cientifica" component={PsicologiaCientifica} />
+      <Route path="/artigo/:slug" component={Artigo} />
+      <Route path="/tag/:slug" component={TagPage} />
       <Route path="/servicos" component={Servicos} />
       <Route path="/depoimentos" component={Depoimentos} />
       <Route path="/404" component={NotFound} />

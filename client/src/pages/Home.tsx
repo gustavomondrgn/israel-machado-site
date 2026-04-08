@@ -1,14 +1,14 @@
 import Layout from "@/components/Layout";
 import FadeIn from "@/components/FadeIn";
 import { Link } from "wouter";
-import { Phone, MapPin, ArrowRight, Clock, Shield, ChevronRight, Instagram } from "lucide-react";
+import { Phone, MapPin, ArrowRight, Shield, ChevronRight, Instagram } from "lucide-react";
 import { useState } from "react";
 
 // CDN URLs
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/hero-bg-FwmxvZ9pDugDEjS2REXZXh.webp";
 const PERFIL_BLAZER = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/fotoperfil(2)_0a6b9b91.jpeg";
 const PERFIL_BRACOS = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/WhatsAppImage2026-03-04at09.40.58-Copia_f1bf01bc.jpeg";
-const POLTRONA_CLINICAL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/poltrona-nova_3516a989.jpeg";
+const POLTRONA_CLINICAL = "/images/poltrona-nova_3516a989.png";
 const CLINICAL_CENTER = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/clinical-center-frente.jpg_c9549d3e.webp";
 const CATEDRAL_PF = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/catedral_14ce2591.jpg";
 const CONTACT_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/contact-bg-WiTgbBHjndtMdqdAfiFnUY.webp";
@@ -48,123 +48,116 @@ const areas = [
   },
 ];
 
-const PERFIL_EXTENDED = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/perfil-extended_e0254b44.png";
+const PERFIL_EXTENDED = "/images/perfil-extended_e0254b44 (1).png";
 
 function HeroSection() {
   return (
     <>
       {/* ===== VERSÃO DESKTOP: foto full-width com caixa translúcida sobreposta ===== */}
       <section className="relative overflow-hidden min-h-[85vh] hidden lg:block">
-        <img
-          src={PERFIL_EXTENDED}
-          alt="Israel Machado - Psicólogo Clínico"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        <div className="absolute top-0 left-0 right-0 h-[70px] bg-gradient-to-b from-black/40 via-black/15 to-transparent z-[1]" />
-
-        <div className="relative z-10 h-full min-h-[85vh] flex items-center">
-          <div className="container">
-            <FadeIn direction="up" duration={0.9}>
-              <div className="bg-ivory/85 backdrop-blur-sm p-12 max-w-lg rounded-sm shadow-lg">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-[1px] bg-bronze" />
-                  <span className="font-sans text-xs tracking-[0.3em] uppercase text-warm-500">
-                    CRP 07/43950
-                  </span>
-                </div>
-                <h1 className="font-display text-[3.2rem] font-semibold text-foreground leading-[1.08] mb-2">
-                  Israel
-                  <br />
-                  Machado
-                </h1>
-                <div className="w-14 h-[2px] bg-marsala/60 mb-3" />
-                <p className="font-display text-lg text-warm-600 italic mb-4">
-                  Psicólogo Clínico
-                </p>
-                <p className="font-body text-[0.9rem] text-foreground/75 leading-relaxed mb-6">
-                  Psicoterapia psicanalítica. Atendimento presencial em Passo Fundo e online para todo o Brasil.
-                </p>
-                <p className="font-body text-[0.8rem] text-warm-500 mb-6">
-                  Sessões de 60 minutos · Semanal
-                </p>
-                <div className="flex flex-row gap-3">
-                  <a
-                    href={WHATSAPP_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-marsala text-primary-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-marsala-light transition-all duration-300 shadow-sm"
-                  >
-                    <Phone className="w-4 h-4" />
-                    Agendar Consulta
-                  </a>
-                  <a
-                    href="#sobre"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-foreground/20 text-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-foreground/5 transition-all duration-300"
-                  >
-                    Sobre Mim
-                  </a>
-                </div>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== VERSÃO MOBILE: foto no topo + informações abaixo, sem sobreposição ===== */}
-      <section className="lg:hidden">
-        {/* Foto de perfil — ocupa o topo da tela */}
-        <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] overflow-hidden">
           <img
             src={PERFIL_EXTENDED}
             alt="Israel Machado - Psicólogo Clínico"
-            className="absolute inset-0 w-full h-full object-cover object-[60%_10%]"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
-          {/* Tarja topo para menu */}
           <div className="absolute top-0 left-0 right-0 h-[70px] bg-gradient-to-b from-black/40 via-black/15 to-transparent z-[1]" />
-          {/* Degradê suave na base para transição com a seção de texto */}
-          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-ivory to-transparent" />
-        </div>
 
-        {/* Informações — fundo sólido, sem sobreposição à foto */}
-        <div className="bg-ivory px-6 pb-10 -mt-6 relative z-10">
-          <FadeIn direction="up" duration={0.7}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-[1px] bg-bronze" />
-              <span className="font-sans text-[0.65rem] tracking-[0.3em] uppercase text-warm-500">
-                CRP 07/43950
-              </span>
+          <div className="relative z-10 h-full min-h-[85vh] flex items-center">
+            <div className="container">
+              <FadeIn direction="up" duration={0.9}>
+                <div className="bg-ivory/85 backdrop-blur-sm p-12 max-w-lg rounded-sm shadow-lg">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-[1px] bg-bronze" />
+                    <span className="font-sans text-xs tracking-[0.3em] uppercase text-warm-500">
+                      CRP 07/43950
+                    </span>
+                  </div>
+                  <h1 className="font-display text-[3.2rem] font-semibold text-foreground leading-[1.08] mb-2">
+                    Israel
+                    <br />
+                    Machado
+                  </h1>
+                  <div className="w-14 h-[2px] bg-marsala/60 mb-3" />
+                  <p className="font-display text-lg text-warm-600 italic mb-4">
+                    Psicólogo Clínico
+                  </p>
+                  <p className="font-body text-[0.9rem] text-foreground/75 leading-relaxed mb-6">
+                    Psicoterapia psicanalítica. Atendimento presencial em Passo Fundo e online para todo o Brasil.
+                  </p>
+                  <p className="font-body text-[0.8rem] text-warm-500 mb-6">
+                    Sessões de 50 minutos · Semanal
+                  </p>
+                  <div className="flex flex-row gap-3">
+                    <a
+                      href={WHATSAPP_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-marsala text-primary-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-marsala-light transition-all duration-300 shadow-sm"
+                    >
+                      <Phone className="w-4 h-4" />
+                      Agendar Consulta
+                    </a>
+                    <a
+                      href="#sobre"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-foreground/20 text-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-foreground/5 transition-all duration-300"
+                    >
+                      Sobre Mim
+                    </a>
+                  </div>
+                </div>
+              </FadeIn>
             </div>
-            <h1 className="font-display text-[2.6rem] font-semibold text-foreground leading-[1.05] mb-1">
-              Israel
-              <br />
-              Machado
-            </h1>
-            <div className="w-12 h-[2px] bg-marsala/60 mb-2" />
-            <p className="font-display text-base text-warm-600 italic mb-3">
-              Psicólogo Clínico
-            </p>
-            <p className="font-body text-[0.85rem] text-foreground/75 leading-relaxed mb-4">
-              Psicoterapia psicanalítica. Atendimento presencial em Passo Fundo e online para todo o Brasil.
-            </p>
-            <p className="font-body text-[0.75rem] text-warm-500 mb-5">
-              Sessões de 60 minutos · Semanal
-            </p>
-            <div className="flex flex-col gap-3">
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-marsala text-primary-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-marsala-light transition-all duration-300 shadow-sm"
-              >
-                <Phone className="w-4 h-4" />
-                Agendar Consulta
-              </a>
-              <a
-                href="#sobre"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-foreground/20 text-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-foreground/5 transition-all duration-300"
-              >
-                Sobre Mim
-              </a>
+          </div>
+        </section>
+
+      {/* ===== VERSÃO MOBILE: foto + card translúcido sobreposto na base ===== */}
+      <section className="relative lg:hidden h-svh overflow-hidden">
+        {/* Foto de perfil — ocupa a tela toda */}
+        <img
+          src={PERFIL_EXTENDED}
+          alt="Israel Machado - Psicólogo Clínico"
+          className="absolute inset-0 w-full h-full object-cover object-[57%_15%]"
+        />
+        {/* Tarja topo para menu */}
+        <div className="absolute top-0 left-0 right-0 h-[70px] bg-gradient-to-b from-black/40 via-black/15 to-transparent z-[1]" />
+
+        {/* Card translúcido sobreposto na parte inferior */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 p-3 sm:p-4">
+          <FadeIn direction="up" duration={0.7}>
+            <div className="bg-ivory/88 backdrop-blur-sm p-4 sm:p-5 rounded-sm shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-[1px] bg-bronze" />
+                <span className="font-sans text-[0.65rem] tracking-[0.3em] uppercase text-warm-500">
+                  CRP 07/43950
+                </span>
+              </div>
+              <h1 className="font-display text-[1.75rem] sm:text-[2rem] font-semibold text-foreground leading-[1.05] mb-1">
+                Israel Machado
+              </h1>
+              <div className="w-10 h-[2px] bg-marsala/60 mb-2" />
+              <p className="font-display text-sm text-warm-600 italic mb-2">
+                Psicólogo Clínico
+              </p>
+              <p className="font-body text-[0.82rem] text-foreground/75 leading-snug mb-4">
+                Psicoterapia psicanalítica. Presencial em Passo Fundo e online para todo o Brasil.
+              </p>
+              <div className="flex flex-col gap-2.5">
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-marsala text-primary-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-marsala-light transition-all duration-300 shadow-sm"
+                >
+                  <Phone className="w-4 h-4" />
+                  Agendar Consulta
+                </a>
+                <a
+                  href="#sobre"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-foreground/20 text-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-foreground/5 transition-all duration-300"
+                >
+                  Sobre Mim
+                </a>
+              </div>
             </div>
           </FadeIn>
         </div>
@@ -177,23 +170,15 @@ function PsicoterapiaSection() {
   return (
     <section className="py-20 lg:py-28 bg-cream" id="psicoterapia">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-stretch">
           {/* Image column */}
-          <FadeIn className="lg:col-span-5" direction="left">
-            <div className="relative">
+          <FadeIn className="lg:col-span-5 flex" direction="left">
+            <div className="relative w-full">
               <img
                 src={POLTRONA_CLINICAL}
                 alt="Poltrona do consultório"
-                className="w-full h-[400px] lg:h-[520px] object-cover rounded-sm shadow-lg"
+                className="w-full h-[320px] sm:h-[400px] lg:h-full lg:absolute lg:inset-0 object-cover object-center rounded-sm shadow-lg"
               />
-              <div className="absolute bottom-4 left-4 right-4 bg-ivory/90 backdrop-blur-sm p-4 rounded-sm">
-                <div className="flex items-center gap-3">
-                  <Clock className="w-4 h-4 text-marsala flex-shrink-0" />
-                  <p className="font-sans text-xs text-foreground/70">
-                    Sessões de 60 minutos &middot; Semanal
-                  </p>
-                </div>
-              </div>
             </div>
           </FadeIn>
 
@@ -223,7 +208,7 @@ function PsicoterapiaSection() {
                 Como funciona?
               </h3>
               <p className="font-body text-base text-foreground/80 leading-[1.85] mb-6">
-                A psicoterapia acontece em um espaço protegido — sessões regulares, horário fixo, sigilo absoluto. Essa regularidade não é burocracia: é a condição para que algo difícil possa ser dito. As sessões têm duração de sessenta minutos e ocorrem semanalmente.
+                A psicoterapia acontece em um espaço protegido — sessões regulares, horário fixo, sigilo absoluto. Essa regularidade não é burocracia: é a condição para que algo difícil possa ser dito. As sessões têm duração de cinquenta minutos e ocorrem semanalmente.
               </p>
               <p className="font-body text-base text-foreground/80 leading-[1.85] mb-8">
                 O atendimento é individual, presencial ou online, e não há número fixo de sessões: a duração é determinada pelo processo, não por um protocolo. O que se passa entre terapeuta e paciente, dentro desse enquadre, é o material de trabalho — o que finalmente pode ser olhado com outra perspectiva.
@@ -278,7 +263,7 @@ function AreasSection() {
                       alt={area.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#2a1f1a]/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                     <h3 className="absolute bottom-4 left-6 right-6 font-display text-xl font-semibold text-white drop-shadow-md group-hover:text-warm-200 transition-colors duration-300">
                       {area.title}
                     </h3>
@@ -370,9 +355,9 @@ function SobreSection() {
   return (
     <section className="py-20 lg:py-28 bg-parchment" id="sobre">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
           {/* Text */}
-          <div className="lg:col-span-7 order-2 lg:order-1">
+          <div className="lg:col-span-7 order-1">
             <FadeIn>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-[1px] bg-bronze" />
@@ -437,13 +422,13 @@ function SobreSection() {
           </div>
 
           {/* Image */}
-          <FadeIn className="lg:col-span-5 order-1 lg:order-2" direction="right">
-            <div className="relative">
-              <div className="absolute -top-3 -right-3 w-full h-full border border-bronze/20 rounded-sm" />
+          <FadeIn className="lg:col-span-5 order-2 flex" direction="right">
+            <div className="relative w-full">
+              <div className="absolute -top-3 -right-3 w-full h-full border border-bronze/20 rounded-sm hidden lg:block" />
               <img
                 src={PERFIL_BRACOS}
                 alt="Israel Machado"
-                className="relative w-full h-[400px] lg:h-[550px] object-cover object-top rounded-sm shadow-lg"
+                className="relative w-full h-[480px] sm:h-[560px] lg:h-full lg:absolute lg:inset-0 object-cover object-top rounded-sm shadow-lg"
               />
             </div>
           </FadeIn>
@@ -535,9 +520,9 @@ function ContatoSection() {
           </FadeIn>
 
           {/* Form */}
-          <FadeIn direction="right">
+          <FadeIn direction="right" className="flex">
             <form
-              className="bg-cream/60 border border-border/50 rounded-sm p-8"
+              className="bg-cream/60 border border-border/50 rounded-sm p-6 sm:p-8 flex flex-col flex-1"
               onSubmit={(e) => {
                 e.preventDefault();
                 const msg = `Olá, meu nome é ${formData.nome}. ${formData.mensagem}`;
@@ -545,7 +530,7 @@ function ContatoSection() {
                 window.open(whatsUrl, '_blank');
               }}
             >
-              <div className="space-y-5">
+              <div className="space-y-5 flex flex-col flex-1">
                 <div>
                   <label className="block font-sans text-xs tracking-wide uppercase text-muted-foreground mb-2">
                     Nome
@@ -571,15 +556,14 @@ function ContatoSection() {
                     placeholder="seu@email.com"
                   />
                 </div>
-                <div>
+                <div className="flex-1 flex flex-col">
                   <label className="block font-sans text-xs tracking-wide uppercase text-muted-foreground mb-2">
                     Mensagem
                   </label>
                   <textarea
                     value={formData.mensagem}
                     onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
-                    rows={5}
-                    className="w-full px-4 py-3 bg-ivory border border-border rounded-sm font-body text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-marsala/50 focus:ring-1 focus:ring-marsala/20 transition-all resize-none"
+                    className="w-full flex-1 min-h-[120px] px-4 py-3 bg-ivory border border-border rounded-sm font-body text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-marsala/50 focus:ring-1 focus:ring-marsala/20 transition-all resize-none"
                     placeholder="Escreva sua mensagem..."
                     required
                   />
@@ -620,7 +604,12 @@ function ComoChegar() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           <FadeIn direction="left">
-            <div className="bg-ivory border border-border/50 rounded-sm overflow-hidden shadow-sm">
+            <a
+              href="https://www.google.com/maps/search/Clinical+Center+Rua+Uruguai+1969+Passo+Fundo+RS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-ivory border border-border/50 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
               <img
                 src={CLINICAL_CENTER}
                 alt="Clinical Center - Passo Fundo"
@@ -640,11 +629,16 @@ function ComoChegar() {
                   Atendimento presencial em consultório equipado e com ambiente acolhedor.
                 </p>
               </div>
-            </div>
+            </a>
           </FadeIn>
 
           <FadeIn direction="right">
-            <div className="bg-ivory border border-border/50 rounded-sm overflow-hidden shadow-sm">
+            <a
+              href="https://www.google.com/maps/search/Pça+Mal+Floriano+Passo+Fundo+RS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-ivory border border-border/50 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
               <img
                 src={SALA_CATEDRAL}
                 alt="Consultório Catedral"
@@ -664,23 +658,27 @@ function ComoChegar() {
                   Segundo local de atendimento, com ambiente reservado e confortável.
                 </p>
               </div>
-            </div>
+            </a>
           </FadeIn>
         </div>
 
         <FadeIn delay={0.3}>
-          <div className="mt-10 max-w-5xl mx-auto rounded-sm overflow-hidden shadow-lg border border-border/50">
+          <a
+            href="https://www.google.com/maps/search/Clinical+Center+Rua+Uruguai+1969+Passo+Fundo+RS"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-10 max-w-5xl mx-auto rounded-sm overflow-hidden shadow-lg border border-border/50"
+          >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3530.7!2d-52.4!3d-28.26!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDE1JzM2LjAiUyA1MsKwMjQnMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v1"
+              src="https://maps.google.com/maps?q=Clinical+Center+Rua+Uruguai+1969+Passo+Fundo+RS+Brazil&t=&z=16&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="350"
-              style={{ border: 0 }}
-              allowFullScreen
+              style={{ border: 0, pointerEvents: "none" }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Localização do consultório"
+              title="Clinical Center — Rua Uruguai, 1969 — Passo Fundo, RS"
             />
-          </div>
+          </a>
         </FadeIn>
       </div>
     </section>

@@ -35,7 +35,7 @@ function ExpandableSection({
 
         <button
           onClick={() => setExpanded(!expanded)}
-          className="mt-6 inline-flex items-center gap-2 font-sans text-sm text-marsala hover:text-marsala-light transition-colors tracking-wide"
+          className="mt-6 inline-flex items-center gap-2 py-2 -my-2 font-sans text-sm text-marsala hover:text-marsala-light transition-colors tracking-wide"
         >
           {expanded ? (
             <>
@@ -65,7 +65,7 @@ export default function PsicologiaCientifica() {
       <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-20">
         <div className="absolute inset-0">
           <img src={HERO_BG} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1a1510]/70 via-[#1a1510]/20 to-[#1a1510]/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/80 to-night/65" />
         </div>
         <div className="container relative z-10">
           <FadeIn>
@@ -92,10 +92,10 @@ export default function PsicologiaCientifica() {
         </div>
       </section>
 
-      {/* Esclarecimentos com Leia Mais */}
-      <section className="py-16 lg:py-24 bg-ivory">
+      {/* Esclarecimentos com Leia Mais — fundo parchment para contraste */}
+      <section className="py-16 lg:py-24 bg-parchment">
         <div className="container">
-          <div className="max-w-3xl mx-auto space-y-8">
+          <div className="max-w-3xl mx-auto">
             {/* Psicologia é ciência */}
             <FadeIn>
               <ExpandableSection
@@ -149,53 +149,68 @@ export default function PsicologiaCientifica() {
                 </div>
               </ExpandableSection>
             </FadeIn>
+          </div>
+        </div>
+      </section>
 
-            {/* Divider */}
-            <FadeIn>
-              <div className="editorial-divider mx-0" />
-            </FadeIn>
+      {/* Artigos — seção separada com fundo ivory + linha cobre superior */}
+      <section className="relative py-20 lg:py-28 bg-ivory">
+        {/* Linha divisória cobre no topo da seção */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-bronze" />
 
-            {/* Artigos e Dicas */}
+        <div className="container">
+          <div className="max-w-3xl mx-auto">
             <FadeIn>
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-[1px] bg-bronze" />
-                  <span className="font-sans text-xs tracking-[0.25em] uppercase text-bronze">
+              <div className="mb-12">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-[1px] bg-bronze" />
+                  <span className="font-sans text-xs tracking-[0.3em] uppercase text-bronze font-medium">
                     Artigos
                   </span>
                 </div>
-                <h2 className="font-display text-2xl sm:text-3xl font-semibold text-foreground mb-3">
+                <h2 className="font-display text-3xl sm:text-4xl font-semibold text-foreground mb-3 leading-tight">
                   Dicas para a vida cotidiana
                 </h2>
-                <p className="font-body text-base text-foreground/65 mb-8">
+                <p className="font-body text-base text-foreground/65 italic">
                   Baseado em evidências
                 </p>
+              </div>
+            </FadeIn>
 
-                {/* Article card - Vício em Telas */}
-                <div className="bg-cream border border-border/50 rounded-sm p-6 hover:shadow-md hover:border-bronze/30 transition-all duration-300 cursor-pointer group">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-bronze/10 text-bronze font-sans text-[10px] tracking-wider uppercase rounded-sm">
-                          <Clock className="w-3 h-3" />
-                          Em breve
-                        </span>
-                      </div>
-                      <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-marsala transition-colors">
-                        Vício em telas: por que acontece e o que fazer
-                      </h3>
-                      <p className="font-body text-sm text-foreground/65 leading-relaxed">
-                        Um olhar baseado em evidências sobre o uso excessivo de telas, os mecanismos por trás do vício digital e estratégias práticas para lidar com isso no dia a dia.
-                      </p>
-                    </div>
+            <FadeIn delay={0.1}>
+              {/* Article card - Vício em Telas */}
+              <div className="bg-cream border border-border/60 rounded-sm p-7 lg:p-8 shadow-sm hover:shadow-md hover:border-bronze/40 transition-all duration-300 group">
+                <Link href="/artigo/vicio-em-telas" className="block">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-bronze/10 text-bronze font-sans text-[10px] tracking-wider uppercase rounded-sm">
+                      <Clock className="w-3 h-3" />
+                      Em breve
+                    </span>
                   </div>
+                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground mb-3 group-hover:text-marsala transition-colors">
+                    Vício em telas: por que acontece e o que fazer
+                  </h3>
+                  <p className="font-body text-sm text-foreground/65 leading-relaxed mb-4">
+                    Um olhar baseado em evidências sobre o uso excessivo de telas, os mecanismos por trás do vício digital e estratégias práticas para lidar com isso no dia a dia.
+                  </p>
+                </Link>
+                <div className="flex flex-wrap gap-1.5">
+                  {["digital", "dependência", "saúde mental"].map((tag) => (
+                    <Link
+                      key={tag}
+                      href={`/tag/${tag.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, "-")}`}
+                      className="inline-block px-2.5 py-1 font-sans text-xs bg-bronze/10 text-bronze/80 hover:bg-marsala hover:text-primary-foreground rounded-sm transition-colors"
+                    >
+                      #{tag}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </FadeIn>
 
             {/* Back link */}
-            <FadeIn>
-              <div className="mt-8">
+            <FadeIn delay={0.2}>
+              <div className="mt-12">
                 <Link
                   href="/"
                   className="inline-flex items-center gap-2 font-sans text-sm text-marsala hover:text-marsala-light transition-colors"

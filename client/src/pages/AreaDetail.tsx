@@ -194,7 +194,7 @@ export default function AreaDetail() {
   return (
     <Layout>
       {/* Hero with area image */}
-      <section className="relative flex items-end overflow-hidden" style={{ minHeight: '380px' }}>
+      <section className="relative flex items-end overflow-hidden min-h-[300px] sm:min-h-[380px]">
         {/* Background image */}
         <div className="absolute inset-0">
           <img
@@ -206,7 +206,7 @@ export default function AreaDetail() {
             }}
           />
           {/* Gradient: dark at top for navbar, dark at bottom for text, lighter in middle to show image */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#2a1f1a]/70 via-[#2a1f1a]/20 to-[#2a1f1a]/65" />
+          <div className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/80 to-night/65" />
         </div>
         {/* Content positioned at bottom with enough top padding for navbar */}
         <div className="container relative z-10 pt-28 pb-10 lg:pt-32 lg:pb-12">
@@ -279,28 +279,28 @@ export default function AreaDetail() {
             </FadeIn>
 
             {/* Navigation */}
-            <div className="mt-12 flex justify-between items-center">
+            <div className="mt-12 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
               {prevSlug ? (
                 <Link
                   href={`/area/${prevSlug}`}
-                  className="inline-flex items-center gap-2 font-sans text-sm text-muted-foreground hover:text-marsala transition-colors"
+                  className="inline-flex items-center gap-2 font-sans text-sm text-muted-foreground hover:text-marsala transition-colors sm:max-w-[45%]"
                 >
-                  <ArrowLeft className="w-4 h-4" />
-                  {areasContent[prevSlug].title}
+                  <ArrowLeft className="w-4 h-4 flex-shrink-0" />
+                  <span className="truncate">{areasContent[prevSlug].title}</span>
                 </Link>
               ) : (
-                <div />
+                <div className="hidden sm:block" />
               )}
               {nextSlug ? (
                 <Link
                   href={`/area/${nextSlug}`}
-                  className="inline-flex items-center gap-2 font-sans text-sm text-muted-foreground hover:text-marsala transition-colors"
+                  className="inline-flex items-center gap-2 font-sans text-sm text-muted-foreground hover:text-marsala transition-colors sm:max-w-[45%] sm:justify-end"
                 >
-                  {areasContent[nextSlug].title}
-                  <ChevronRight className="w-4 h-4" />
+                  <span className="truncate">{areasContent[nextSlug].title}</span>
+                  <ChevronRight className="w-4 h-4 flex-shrink-0" />
                 </Link>
               ) : (
-                <div />
+                <div className="hidden sm:block" />
               )}
             </div>
           </div>
