@@ -1,10 +1,11 @@
 import Layout from "@/components/Layout";
 import FadeIn from "@/components/FadeIn";
 import { Link } from "wouter";
-import { ArrowLeft, ChevronDown, ChevronUp, Clock } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, Clock, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/psicologia-concept-1-jvqa5BXzpRZRWKDF3pqWq6.webp";
+const WHATSAPP_LINK = "https://wa.me/5554999141101?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.";
 
 function ExpandableSection({
   title,
@@ -65,7 +66,7 @@ export default function PsicologiaCientifica() {
       <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-20">
         <div className="absolute inset-0">
           <img src={HERO_BG} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/80 to-night/65" />
+          <div className="absolute inset-0 bg-night/40" />
         </div>
         <div className="container relative z-10">
           <FadeIn>
@@ -208,9 +209,27 @@ export default function PsicologiaCientifica() {
               </div>
             </FadeIn>
 
-            {/* Back link */}
+            {/* CTA */}
             <FadeIn delay={0.2}>
-              <div className="mt-12">
+              <div className="mt-12 p-8 bg-cream border border-border/50 rounded-sm text-center">
+                <p className="font-body text-base text-foreground/75 mb-6">
+                  Se quiser conversar mais a respeito, entre em contato.
+                </p>
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-marsala text-primary-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-marsala-light transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  Entrar em Contato
+                </a>
+              </div>
+            </FadeIn>
+
+            {/* Back link */}
+            <FadeIn delay={0.3}>
+              <div className="mt-8">
                 <Link
                   href="/"
                   className="inline-flex items-center gap-2 font-sans text-sm text-marsala hover:text-marsala-light transition-colors"

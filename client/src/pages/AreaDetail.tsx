@@ -205,8 +205,7 @@ export default function AreaDetail() {
               objectPosition: slug === 'depressao' ? 'center 15%' : slug === 'luto' ? 'center 35%' : 'center center'
             }}
           />
-          {/* Gradient: dark at top for navbar, dark at bottom for text, lighter in middle to show image */}
-          <div className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/80 to-night/65" />
+          <div className="absolute inset-0 bg-night/40" />
         </div>
         {/* Content positioned at bottom with enough top padding for navbar */}
         <div className="container relative z-10 pt-28 pb-10 lg:pt-32 lg:pb-12">
@@ -264,7 +263,7 @@ export default function AreaDetail() {
             <FadeIn>
               <div className="mt-12 p-8 bg-cream border border-border/50 rounded-sm text-center">
                 <p className="font-body text-base text-foreground/75 mb-6">
-                  Se você se identificou com o que leu, o primeiro passo é conversar.
+                  Se quiser conversar mais a respeito, entre em contato.
                 </p>
                 <a
                   href={WHATSAPP_LINK}

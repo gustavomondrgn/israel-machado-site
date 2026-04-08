@@ -19,7 +19,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Início", href: "/" },
   {
-    label: "Áreas de Atuação",
+    label: "Principais Áreas",
     href: "/#areas",
     children: [
       { label: "Depressão", href: "/area/depressao" },

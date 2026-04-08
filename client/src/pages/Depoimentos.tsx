@@ -126,10 +126,10 @@ function DepoimentoCard({ depoimento, delay }: { depoimento: Depoimento; delay: 
           &ldquo;{depoimento.text}&rdquo;
         </blockquote>
 
-        {/* Footer — data + local */}
+        {/* Footer — local */}
         <div className="pt-4 border-t border-border/40">
           <p className="font-sans text-xs text-muted-foreground">
-            {depoimento.date} &middot; {depoimento.location}
+            {depoimento.location}
           </p>
         </div>
       </article>

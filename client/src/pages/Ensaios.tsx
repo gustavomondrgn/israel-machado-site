@@ -88,20 +88,20 @@ export default function Ensaios() {
           <img src={ENSAIOS_BG} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/80 to-night/65" />
         </div>
-        <div className="container relative z-10 pt-28 pb-12 lg:pt-32 lg:pb-16">
+        <div className="container relative z-10 pt-64 pb-40 lg:pt-80 lg:pb-56">
           <FadeIn>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-[1px] bg-bronze-light" />
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-[1px] bg-bronze-light" />
                 <span className="font-sans text-xs tracking-[0.3em] uppercase text-warm-200">
                   Ensaios
                 </span>
               </div>
               <blockquote>
-                <p className="font-display text-base sm:text-lg lg:text-xl text-white italic leading-relaxed mb-3">
+                <p className="font-display text-xl sm:text-2xl lg:text-3xl text-white italic leading-relaxed mb-4">
                   "Minha tarefa, aquela que estou tentando realizar, é, pelo poder da palavra escrita, levar você a ouvir, e a sentir — é, antes de tudo, levar você a ver. Nada mais além disso, e isso é tudo."
                 </p>
-                <footer className="font-sans text-xs text-warm-300">
+                <footer className="font-sans text-sm text-warm-300">
                   — Joseph Conrad
                 </footer>
               </blockquote>

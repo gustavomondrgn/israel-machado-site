@@ -8,6 +8,7 @@ const WHATSAPP_LINK = "https://wa.me/5554999141101?text=Ol%C3%A1%2C%20gostaria%2
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/servicos-concept-2_b61d70a2.jpg";
 const SERVICOS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/servicos-bg-CrNcxSYVtzepUjzYCekG7f.webp";
 const POLTRONA_CLINICAL = "/images/poltrona-nova_3516a989.png";
+const CLINICAL_CENTER_FACHADA = "/images/WhatsApp Image 2026-04-08 at 13.02.11.jpeg";
 const SALA_CATEDRAL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/sala-catedral-nova_af2ae77d.jpeg";
 const PALESTRA_FRENTE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/palestra-frente_4ff2b1ac.jpeg";
 const PALESTRA_SIMULACAO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/palestra-simulacao_1657aca1.jpeg";
@@ -24,7 +25,7 @@ export default function Servicos() {
       <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-20">
         <div className="absolute inset-0">
           <img src={HERO_BG} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/80 to-night/65" />
+          <div className="absolute inset-0 bg-night/40" />
         </div>
         <div className="container relative z-10">
           <FadeIn>
@@ -175,7 +176,7 @@ export default function Servicos() {
                     <div className="flex items-center gap-3 mb-3">
                       <Mic className="w-5 h-5 text-bronze" />
                       <h2 className="font-display text-xl sm:text-2xl font-semibold text-foreground">
-                        Palestras e Rodas de Conversa
+                        Palestras, seminários e aulas teórico-expositivas
                       </h2>
                     </div>
                     <p className="font-body text-sm text-foreground/75 leading-[1.8] mb-5">
@@ -235,7 +236,7 @@ export default function Servicos() {
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <img
-                      src={POLTRONA_CLINICAL}
+                      src={CLINICAL_CENTER_FACHADA}
                       alt="Clinical Center — consultório principal"
                       className="w-full h-full object-cover"
                     />
@@ -274,7 +275,7 @@ export default function Servicos() {
                     <img
                       src={SALA_CATEDRAL}
                       alt="Consultório Catedral"
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover object-right"
                     />
                   </div>
                   <div className="p-6">
@@ -303,11 +304,8 @@ export default function Servicos() {
         <div className="container">
           <FadeIn>
             <div className="max-w-2xl mx-auto text-center">
-              <h2 className="font-display text-2xl sm:text-3xl font-semibold text-foreground mb-4">
-                Entre em contato
-              </h2>
               <p className="font-body text-base text-foreground/70 mb-8">
-                Para agendar uma consulta, tirar dúvidas ou saber mais sobre qualquer um dos serviços, entre em contato pelo WhatsApp.
+                Se quiser conversar mais a respeito, entre em contato.
               </p>
               <a
                 href={WHATSAPP_LINK}
@@ -316,7 +314,7 @@ export default function Servicos() {
                 className="inline-flex items-center gap-2 px-7 py-3.5 bg-marsala text-primary-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-marsala-light transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                Agendar pelo WhatsApp
+                Entrar em Contato
               </a>
             </div>
           </FadeIn>
