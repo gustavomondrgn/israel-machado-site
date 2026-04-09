@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import FadeIn from "@/components/FadeIn";
 import { Link } from "wouter";
-import { ArrowLeft, Phone, Users, Mic, MapPin } from "lucide-react";
+import { ArrowLeft, Phone, Users, Mic, MapPin, Monitor } from "lucide-react";
 import { useEffect } from "react";
 
 const WHATSAPP_LINK = "https://wa.me/5554999141101?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.";
@@ -113,16 +113,13 @@ export default function Servicos() {
             <FadeIn delay={0.1}>
               <div className="bg-cream border border-border/50 rounded-sm overflow-hidden shadow-sm">
                 <div className="grid grid-cols-1 lg:grid-cols-2">
-                  <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
-                    <img
-                      src={SALA_CATEDRAL}
-                      alt="Consultório para atendimento"
-                      className="w-full h-full object-cover"
-                    />
+                  {/* Placeholder neutro — bloco de cor com ícone (até receber foto real) */}
+                  <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden bg-gradient-to-br from-night via-night to-warm-900 flex items-center justify-center">
+                    <Monitor className="w-20 h-20 text-bronze/60" strokeWidth={1.2} />
                   </div>
                   <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
                     <div className="flex items-center gap-3 mb-3">
-                      <Users className="w-5 h-5 text-marsala" />
+                      <Monitor className="w-5 h-5 text-marsala" />
                       <h2 className="font-display text-2xl sm:text-3xl font-semibold text-foreground">
                         Psicoterapia Online
                       </h2>
@@ -145,6 +142,58 @@ export default function Servicos() {
                       </li>
                     </ul>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-auto">
+                      <p className="font-display text-3xl font-semibold text-marsala">R$ 180</p>
+                      <a
+                        href={WHATSAPP_LINK}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-marsala text-primary-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-marsala-light transition-colors shadow-sm"
+                      >
+                        <Phone className="w-4 h-4" />
+                        Agendar
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Card 3 — Psicoterapia Presencial Social (Catedral) */}
+            <FadeIn delay={0.15}>
+              <div className="bg-cream border border-border/50 rounded-sm overflow-hidden shadow-sm">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
+                    <img
+                      src={SALA_CATEDRAL}
+                      alt="Consultório Catedral"
+                      className="w-full h-full object-cover object-right"
+                    />
+                  </div>
+                  <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-3">
+                      <Users className="w-5 h-5 text-marsala" />
+                      <h2 className="font-display text-2xl sm:text-3xl font-semibold text-foreground">
+                        Psicoterapia Presencial — Valor Social
+                      </h2>
+                    </div>
+                    <p className="font-body text-base text-foreground/80 leading-[1.8] mb-5">
+                      Modalidade de atendimento presencial com valor social, realizada no consultório da Catedral. Voltada para pessoas que precisam de psicoterapia mas para quem o valor padrão é uma barreira.
+                    </p>
+                    <ul className="space-y-2 mb-6">
+                      <li className="flex items-start gap-2 font-sans text-sm text-foreground/65">
+                        <span className="w-1.5 h-1.5 rounded-full bg-bronze mt-1.5 flex-shrink-0" />
+                        Sessões semanais de 50 minutos
+                      </li>
+                      <li className="flex items-start gap-2 font-sans text-sm text-foreground/65">
+                        <span className="w-1.5 h-1.5 rounded-full bg-bronze mt-1.5 flex-shrink-0" />
+                        Catedral &middot; Pça. Mal. Floriano
+                      </li>
+                      <li className="flex items-start gap-2 font-sans text-sm text-foreground/65">
+                        <span className="w-1.5 h-1.5 rounded-full bg-bronze mt-1.5 flex-shrink-0" />
+                        Adultos
+                      </li>
+                    </ul>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-auto">
                       <p className="font-display text-lg font-medium text-foreground/60">Valor sob consulta</p>
                       <a
                         href={WHATSAPP_LINK}
@@ -153,7 +202,7 @@ export default function Servicos() {
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-marsala text-primary-foreground font-sans text-sm tracking-wider uppercase rounded-sm hover:bg-marsala-light transition-colors shadow-sm"
                       >
                         <Phone className="w-4 h-4" />
-                        Consultar
+                        Agendar
                       </a>
                     </div>
                   </div>
@@ -161,7 +210,7 @@ export default function Servicos() {
               </div>
             </FadeIn>
 
-            {/* Card 3 — Palestras (menos destaque) */}
+            {/* Card 4 — Palestras (menos destaque) */}
             <FadeIn delay={0.2}>
               <div className="bg-ivory border border-border/30 rounded-sm overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-3">
