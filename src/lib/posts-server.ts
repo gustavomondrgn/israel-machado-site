@@ -123,7 +123,9 @@ export async function getArtigoBySlug(slug: string): Promise<ArtigoDoc | null> {
         and: [{ slug: { equals: slug } }, { status: { equals: "published" } }],
       },
       limit: 1,
-      depth: 1,
+      // depth: 2 garante que links internos do Lexical (relação para outro
+      // artigo/ensaio) venham com o doc.value populado incluindo slug.
+      depth: 2,
     });
     return (docs[0] as ArtigoDoc) ?? null;
   } catch (err) {
@@ -177,7 +179,8 @@ export async function getEnsaioBySlug(slug: string): Promise<EnsaioDoc | null> {
         and: [{ slug: { equals: slug } }, { status: { equals: "published" } }],
       },
       limit: 1,
-      depth: 1,
+      // depth: 2 p/ popular slug dos links internos dentro do Lexical.
+      depth: 2,
     });
     return (docs[0] as EnsaioDoc) ?? null;
   } catch (err) {

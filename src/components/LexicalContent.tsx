@@ -3,6 +3,38 @@ import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical
 
 type Variant = "body" | "notes" | "references";
 
+// Mapeia relationTo → prefixo da rota pública. Quando o editor liga a
+// outro artigo via o dialog "Link → Internal", o Lexical salva
+// `linkType: "internal"` + `doc.{relationTo, value}`. Sem esta função o
+// href caía em "#" e o link voltava para a própria página.
+const COLLECTION_ROUTES: Record<string, string> = {
+  artigos: "/psicologia-cientifica",
+  ensaios: "/ensaios",
+};
+
+function resolveLinkHref(fields: {
+  url?: string;
+  linkType?: string;
+  doc?: {
+    relationTo?: string;
+    value?: string | number | { id?: string | number; slug?: string };
+  };
+}): string {
+  if (fields.linkType === "internal" && fields.doc) {
+    const prefix = fields.doc.relationTo
+      ? COLLECTION_ROUTES[fields.doc.relationTo]
+      : undefined;
+    const value = fields.doc.value;
+    const slug =
+      value && typeof value === "object" && typeof value.slug === "string"
+        ? value.slug
+        : undefined;
+    if (prefix && slug) return `${prefix}/${slug}`;
+  }
+  if (fields.url) return fields.url;
+  return "#";
+}
+
 const BODY_PARAGRAPH = "font-body text-base lg:text-[1.1rem] text-foreground/85 leading-[1.9] mb-6";
 const BODY_PARAGRAPH_FIRST = `drop-cap ${BODY_PARAGRAPH}`;
 const NOTES_PARAGRAPH = "font-body text-sm text-foreground/65 leading-relaxed";
@@ -40,28 +72,28 @@ const buildConverters = (variant: Variant): JSXConvertersFunction =>
         const tag = (node as { tag: string }).tag;
         if (tag === "h1") {
           return (
-            <h1 className="font-display text-3xl sm:text-4xl font-semibold text-foreground mt-12 mb-6 leading-tight">
+            <h1 className="font-body text-3xl sm:text-4xl font-semibold text-foreground mt-12 mb-6 leading-tight">
               {children}
             </h1>
           );
         }
         if (tag === "h2") {
           return (
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold text-foreground mt-10 mb-5 leading-tight">
+            <h2 className="font-body text-2xl sm:text-3xl font-semibold text-foreground mt-10 mb-5 leading-tight">
               {children}
             </h2>
           );
         }
         if (tag === "h3") {
           return (
-            <h3 className="font-display text-xl font-semibold text-foreground mt-8 mb-4">
+            <h3 className="font-body text-xl font-semibold text-foreground mt-8 mb-4">
               {children}
             </h3>
           );
         }
         if (tag === "h4") {
           return (
-            <h4 className="font-display text-lg font-semibold text-foreground mt-6 mb-3">
+            <h4 className="font-body text-lg font-semibold text-foreground mt-6 mb-3">
               {children}
             </h4>
           );
@@ -102,8 +134,18 @@ const buildConverters = (variant: Variant): JSXConvertersFunction =>
       },
       link: ({ node, nodesToJSX }) => {
         const children = nodesToJSX({ nodes: node.children });
-        const fields = (node as { fields?: { url?: string; newTab?: boolean; linkType?: string } }).fields ?? {};
-        const href = fields.url ?? "#";
+        const fields = (node as {
+          fields?: {
+            url?: string;
+            newTab?: boolean;
+            linkType?: string;
+            doc?: {
+              relationTo?: string;
+              value?: string | number | { id?: string | number; slug?: string };
+            };
+          };
+        }).fields ?? {};
+        const href = resolveLinkHref(fields);
         const newTab = fields.newTab;
         return (
           <a
@@ -118,8 +160,18 @@ const buildConverters = (variant: Variant): JSXConvertersFunction =>
       },
       autolink: ({ node, nodesToJSX }) => {
         const children = nodesToJSX({ nodes: node.children });
-        const fields = (node as { fields?: { url?: string; newTab?: boolean } }).fields ?? {};
-        const href = fields.url ?? "#";
+        const fields = (node as {
+          fields?: {
+            url?: string;
+            newTab?: boolean;
+            linkType?: string;
+            doc?: {
+              relationTo?: string;
+              value?: string | number | { id?: string | number; slug?: string };
+            };
+          };
+        }).fields ?? {};
+        const href = resolveLinkHref(fields);
         const newTab = fields.newTab;
         return (
           <a

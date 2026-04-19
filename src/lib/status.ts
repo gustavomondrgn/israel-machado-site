@@ -22,7 +22,11 @@ export type StatusBadge = {
   className: string;
 };
 
-const STATUS_BADGES: Record<Exclude<ContentStatus, "published" | "draft">, StatusBadge> = {
+const STATUS_BADGES: Record<Exclude<ContentStatus, "draft">, StatusBadge> = {
+  published: {
+    label: "Publicado",
+    className: "bg-emerald-100 text-emerald-800 border-emerald-200",
+  },
   coming_soon: {
     label: "Em breve",
     className: "bg-night/10 text-night border-night/20",
@@ -50,7 +54,7 @@ const STATUS_BADGES: Record<Exclude<ContentStatus, "published" | "draft">, Statu
 };
 
 export function getStatusBadge(status: string): StatusBadge | null {
-  if (status === "published" || status === "draft") return null;
+  if (status === "draft") return null;
   return STATUS_BADGES[status as keyof typeof STATUS_BADGES] ?? null;
 }
 

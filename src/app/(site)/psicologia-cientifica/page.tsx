@@ -146,7 +146,7 @@ export default async function PsicologiaCientifica() {
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-white leading-tight mb-6 drop-shadow-lg">
               Psicologia Científica
             </h1>
-            <p className="font-body text-lg text-warm-200/90 max-w-3xl leading-relaxed drop-shadow">
+            <p className="font-body text-lg text-warm-200/90 leading-relaxed drop-shadow">
               Seção destinada à divulgação científica — novidades, atualidades, artigos, metanálises, comentários — e apresentar algumas dicas para a vida cotidiana baseadas em evidências.
             </p>
           </FadeIn>

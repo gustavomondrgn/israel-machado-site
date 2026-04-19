@@ -34,7 +34,7 @@ export default async function Ensaios() {
         </div>
         <div className="container relative z-10 pt-64 pb-40 lg:pt-80 lg:pb-56">
           <FadeIn>
-            <div className="max-w-3xl">
+            <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-[1px] bg-bronze-light" />
                 <span className="font-sans text-xs tracking-[0.3em] uppercase text-warm-200">
@@ -57,7 +57,7 @@ export default async function Ensaios() {
       {/* Introdução geral */}
       <section className="py-16 lg:py-20 bg-ivory">
         <div className="container">
-          <div className="max-w-3xl mx-auto">
+          <div>
             <FadeIn>
               <p className="font-body text-base lg:text-lg text-foreground/85 leading-[1.85] mb-6">
                 Aqui me dedico, humildemente, a cumprir esta tarefa que define a função de um escritor — e por que não, à sua maneira, de um psicólogo.
@@ -73,7 +73,7 @@ export default async function Ensaios() {
       {/* Essays list */}
       <section className="py-16 lg:py-24 bg-cream">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
+          <div>
             <EnsaiosList ensaios={items} />
 
             {/* CTA */}
