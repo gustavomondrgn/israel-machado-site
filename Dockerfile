@@ -17,9 +17,18 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 ENV DOCKER_BUILD=true
 
-# Build args for Payload (needs DB during build for types)
+# Build args para o Payload (migrations rodam durante o build).
+# Precisam ser expostos como ENV para que `payload migrate` e `next build`
+# consigam conectar no banco e ler o secret. No Coolify, marque essas
+# variáveis como "Build Variable" além de runtime.
 ARG DATABASE_URI
+ENV DATABASE_URI=$DATABASE_URI
 ARG PAYLOAD_SECRET
+ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
+
+# Roda migrations antes do build. O container final (runner) não tem
+# tsconfig.json nem os fontes, então migrations aqui é o lugar certo.
+RUN pnpm payload migrate
 
 RUN pnpm build
 
