@@ -11,6 +11,8 @@ import {
 import { tagToSlug } from "@/lib/posts";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 const ENSAIOS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/ensaios-bg-WAg25f8JNsacXt3yywyAFo.webp";
 
 type Props = { params: Promise<{ slug: string }> };

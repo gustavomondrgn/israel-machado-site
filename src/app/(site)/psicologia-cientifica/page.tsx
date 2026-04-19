@@ -5,6 +5,8 @@ import ExpandableSection from "./_components/ExpandableSection";
 import { getPublishedArtigos } from "@/lib/posts-server";
 import { tagToSlug } from "@/lib/posts";
 
+export const dynamic = "force-dynamic";
+
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/psicologia-concept-1-jvqa5BXzpRZRWKDF3pqWq6.webp";
 const WHATSAPP_LINK = "https://wa.me/5554999141101?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.";
 

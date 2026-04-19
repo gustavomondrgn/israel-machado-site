@@ -3,6 +3,8 @@ import EnsaiosList, { type EnsaioListItem } from "./_components/EnsaiosList";
 import { getAllEnsaios, type EnsaioCategoryDoc } from "@/lib/posts-server";
 import { Phone } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 const ENSAIOS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/ensaios-bg-WAg25f8JNsacXt3yywyAFo.webp";
 const DIVA = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/Div%C3%A3_d27d6338.jpeg";
 const WHATSAPP_LINK = "https://wa.me/5554999141101?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.";

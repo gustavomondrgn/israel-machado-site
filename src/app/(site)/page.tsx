@@ -5,6 +5,8 @@ import Showcase from "@/components/Showcase";
 import ContatoSection from "@/components/home/ContatoSection";
 import { getShowcaseItems } from "@/lib/posts-server";
 
+export const dynamic = "force-dynamic";
+
 // CDN URLs
 const PERFIL_BRACOS = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/WhatsAppImage2026-03-04at09.40.58-Copia_f1bf01bc.jpeg";
 const POLTRONA_CLINICAL = "/images/poltrona-nova_3516a989.png";

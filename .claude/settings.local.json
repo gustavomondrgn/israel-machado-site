@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(tree -L 3 /c/Users/josen/Downloads/israel-machado-site-main --ignore node_modules -I 'dist|.git')",
-      "Bash(pnpm exec *)"
+      "Bash(pnpm exec *)",
+      "Bash(npx tsc *)"
     ]
   }
 }

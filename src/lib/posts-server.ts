@@ -39,75 +39,112 @@ export type EnsaioDoc = {
   publishedAt?: string | null;
 };
 
+// Fallback vazio quando o Payload/DB não está disponível (ex.: build no Docker
+// sem DATABASE_URI). Evita quebrar o build e permite que as páginas dinâmicas
+// busquem os dados em runtime.
+function handlePayloadError(context: string, err: unknown) {
+  console.warn(`[posts-server] Payload indisponível em "${context}":`, err);
+}
+
 export async function getPublishedArtigos(): Promise<ArtigoDoc[]> {
-  const payload = await getPayload();
-  const { docs } = await payload.find({
-    collection: "artigos",
-    where: { status: { equals: "published" } },
-    sort: "-publishedAt",
-    limit: 100,
-    depth: 1,
-  });
-  return docs as ArtigoDoc[];
+  try {
+    const payload = await getPayload();
+    const { docs } = await payload.find({
+      collection: "artigos",
+      where: { status: { equals: "published" } },
+      sort: "-publishedAt",
+      limit: 100,
+      depth: 1,
+    });
+    return docs as ArtigoDoc[];
+  } catch (err) {
+    handlePayloadError("getPublishedArtigos", err);
+    return [];
+  }
 }
 
 export async function getArtigoBySlug(slug: string): Promise<ArtigoDoc | null> {
-  const payload = await getPayload();
-  const { docs } = await payload.find({
-    collection: "artigos",
-    where: {
-      and: [{ slug: { equals: slug } }, { status: { equals: "published" } }],
-    },
-    limit: 1,
-    depth: 1,
-  });
-  return (docs[0] as ArtigoDoc) ?? null;
+  try {
+    const payload = await getPayload();
+    const { docs } = await payload.find({
+      collection: "artigos",
+      where: {
+        and: [{ slug: { equals: slug } }, { status: { equals: "published" } }],
+      },
+      limit: 1,
+      depth: 1,
+    });
+    return (docs[0] as ArtigoDoc) ?? null;
+  } catch (err) {
+    handlePayloadError("getArtigoBySlug", err);
+    return null;
+  }
 }
 
 export async function getPublishedEnsaios(): Promise<EnsaioDoc[]> {
-  const payload = await getPayload();
-  const { docs } = await payload.find({
-    collection: "ensaios",
-    where: { status: { equals: "published" } },
-    sort: "-publishedAt",
-    limit: 200,
-    depth: 1,
-  });
-  return docs as EnsaioDoc[];
+  try {
+    const payload = await getPayload();
+    const { docs } = await payload.find({
+      collection: "ensaios",
+      where: { status: { equals: "published" } },
+      sort: "-publishedAt",
+      limit: 200,
+      depth: 1,
+    });
+    return docs as EnsaioDoc[];
+  } catch (err) {
+    handlePayloadError("getPublishedEnsaios", err);
+    return [];
+  }
 }
 
 export async function getAllEnsaios(): Promise<EnsaioDoc[]> {
-  const payload = await getPayload();
-  const { docs } = await payload.find({
-    collection: "ensaios",
-    sort: "title",
-    limit: 200,
-    depth: 1,
-  });
-  return docs as EnsaioDoc[];
+  try {
+    const payload = await getPayload();
+    const { docs } = await payload.find({
+      collection: "ensaios",
+      sort: "title",
+      limit: 200,
+      depth: 1,
+    });
+    return docs as EnsaioDoc[];
+  } catch (err) {
+    handlePayloadError("getAllEnsaios", err);
+    return [];
+  }
 }
 
 export async function getEnsaioBySlug(slug: string): Promise<EnsaioDoc | null> {
-  const payload = await getPayload();
-  const { docs } = await payload.find({
-    collection: "ensaios",
-    where: {
-      and: [{ slug: { equals: slug } }, { status: { equals: "published" } }],
-    },
-    limit: 1,
-    depth: 1,
-  });
-  return (docs[0] as EnsaioDoc) ?? null;
+  try {
+    const payload = await getPayload();
+    const { docs } = await payload.find({
+      collection: "ensaios",
+      where: {
+        and: [{ slug: { equals: slug } }, { status: { equals: "published" } }],
+      },
+      limit: 1,
+      depth: 1,
+    });
+    return (docs[0] as EnsaioDoc) ?? null;
+  } catch (err) {
+    handlePayloadError("getEnsaioBySlug", err);
+    return null;
+  }
 }
 
 export async function getEnsaioCategories(): Promise<EnsaioCategoryDoc[]> {
-  const payload = await getPayload();
-  const { docs } = await payload.find({
-    collection: "ensaio-categories",
-    sort: "name",
-    limit: 100,
-  });
-  return docs as EnsaioCategoryDoc[];
+  try {
+    const payload = await getPayload();
+    const { docs } = await payload.find({
+      collection: "ensaio-categories",
+      sort: "name",
+      limit: 100,
+    });
+    return docs as EnsaioCategoryDoc[];
+  } catch (err) {
+    handlePayloadError("getEnsaioCategories", err);
+    return [];
+  }
 }
 
 export type ShowcaseItem = {

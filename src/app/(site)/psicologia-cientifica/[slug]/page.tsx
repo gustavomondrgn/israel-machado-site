@@ -7,6 +7,8 @@ import { getArtigoBySlug } from "@/lib/posts-server";
 import { tagToSlug } from "@/lib/posts";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663445130629/85MobFamEzJu6NZEiDVUCk/psicologia-concept-1-jvqa5BXzpRZRWKDF3pqWq6.webp";
 
 type Props = { params: Promise<{ slug: string }> };
