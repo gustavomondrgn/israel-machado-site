@@ -126,26 +126,27 @@
   }
 }
 
-@layer components {
-  .container {
-    width: 100%;
-    max-width: 1080px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
+/* Override do `.container` nativo do Tailwind v4. Usar `@utility` é a
+   forma idiomática em v4 — substitui a utility built-in (que expande
+   até 1280px no breakpoint xl). Sem isso, qualquer `<div class="container">`
+   nas páginas chega a ~1280px no desktop, ignorando nosso limite de 1080px. */
+@utility container {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
 
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: 2.5rem;
+  }
+}
+
+@layer components {
   .flex {
     min-height: 0;
     min-width: 0;
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
-    }
   }
 
   .drop-cap::first-letter {

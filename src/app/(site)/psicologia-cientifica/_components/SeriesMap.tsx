@@ -31,7 +31,24 @@ export type MapSeries = {
 // Paleta de ciclos — cada ciclo tem um tom diferente, derivado da paleta
 // do site. Ciclo 1 = azulado (night), 2 = rosado (marsala), 3 = verde-oliva
 // (bronze). A partir do 4 alterna variações mais claras dos mesmos tons.
-const CYCLE_PALETTE = [
+type CyclePalette = {
+  badge: string;
+  header: string;
+  headerText: string;
+  accent: string;
+  hoverAccent: string;
+};
+
+const NEUTRAL_PALETTE: CyclePalette = {
+  // Usado quando o artigo não tem cycleNumber definido.
+  badge: "bg-warm-300 text-warm-800",
+  header: "bg-warm-100 border-warm-200",
+  headerText: "text-warm-700",
+  accent: "border-l-warm-300",
+  hoverAccent: "hover:border-l-warm-400",
+};
+
+const CYCLE_PALETTE: CyclePalette[] = [
   {
     // Ciclo 1 — azulado/lavanda
     badge: "bg-night text-white",
@@ -58,10 +75,11 @@ const CYCLE_PALETTE = [
   },
 ];
 
-function paletteFor(cycleNumber: number) {
-  // Para ciclo 4+ voltamos ao início com variações suaves (mesma paleta,
-  // contraste levemente diferente). Mantém coerência visual sem exigir
-  // definição manual para cada ciclo adicional.
+function paletteFor(cycleNumber: number): CyclePalette {
+  // cycleNumber < 1 = artigo sem ciclo definido (grupo "Sem ciclo").
+  // Usa paleta neutra em tom warm para não confundir com ciclos reais.
+  if (cycleNumber < 1) return NEUTRAL_PALETTE;
+  // Ciclo 4+ recicla as 3 paletas preservando coerência visual.
   return CYCLE_PALETTE[(cycleNumber - 1) % CYCLE_PALETTE.length];
 }
 
@@ -127,11 +145,13 @@ function CycleBlock({ cycle }: { cycle: MapCycle }) {
         aria-expanded={open}
         className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-white/30 transition-colors"
       >
-        <span
-          className={`inline-flex items-center justify-center px-3 py-1 rounded-sm font-sans text-xs tracking-wide uppercase font-medium ${palette.badge}`}
-        >
-          Ciclo {cycle.cycleNumber}
-        </span>
+        {cycle.cycleNumber >= 1 && (
+          <span
+            className={`inline-flex items-center justify-center px-3 py-1 rounded-sm font-sans text-xs tracking-wide uppercase font-medium ${palette.badge}`}
+          >
+            Ciclo {cycle.cycleNumber}
+          </span>
+        )}
         <span className={`flex-1 font-display text-lg font-semibold ${palette.headerText}`}>
           {cycle.cycleName}
         </span>
