@@ -221,14 +221,14 @@ export default async function PsicologiaCientifica() {
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-[1px] bg-bronze" />
                 <span className="font-sans text-xs tracking-[0.3em] uppercase text-bronze font-medium">
-                  Mapa da Série
+                  Artigos
                 </span>
               </div>
               <h2 className="font-display text-3xl sm:text-4xl font-semibold text-foreground mb-3 leading-tight">
-                Psicologia Científica — Mapa da Série
+                Aplicações para a vida cotidiana
               </h2>
               <p className="font-body text-base text-foreground/65 italic">
-                Baseado em evidências, organizado por ciclos temáticos.
+                Baseado em evidências
               </p>
             </div>
           </FadeIn>
