@@ -2,16 +2,17 @@
 
 import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
-import { ChevronRight, Clock } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { useState, useMemo } from "react";
 import { tagToSlug } from "@/lib/posts";
+import { getStatusBadge, isClickable } from "@/lib/status";
 
 export type EnsaioListItem = {
   id: string;
   title: string;
   slug: string;
   category: string;
-  available: boolean;
+  status: string;
   tags: string[];
 };
 
@@ -93,65 +94,83 @@ export default function EnsaiosList({ ensaios }: { ensaios: EnsaioListItem[] }) 
             </div>
             <div className="space-y-4">
               {cat.essays.map((essay) => (
-                <div key={essay.id} data-category={cat.title}>
-                  {essay.available ? (
-                    <div className="relative p-6 bg-ivory border-l-4 border-l-marsala border border-border/60 rounded-sm hover:shadow-lg hover:border-l-marsala-light transition-all duration-300 group">
-                      <Link
-                        href={`/ensaios/${essay.slug}`}
-                        className="absolute inset-0 z-0"
-                        aria-label={essay.title}
-                      />
-                      <div className="relative z-10 flex items-center justify-between mb-3 pointer-events-none">
-                        <h4 className="font-display text-lg sm:text-xl font-semibold text-foreground group-hover:text-marsala transition-colors">
-                          {essay.title}
-                        </h4>
-                        <ChevronRight className="w-5 h-5 text-marsala group-hover:translate-x-1 transition-all flex-shrink-0" />
-                      </div>
-                      {essay.tags.length > 0 && (
-                        <div className="relative z-10 flex flex-wrap gap-1.5">
-                          {essay.tags.map((tag) => (
-                            <Link
-                              key={tag}
-                              href={`/tag/${tagToSlug(tag)}`}
-                              className="inline-block px-2.5 py-1 font-sans text-xs bg-bronze/10 text-bronze/80 hover:bg-marsala hover:text-primary-foreground rounded-sm transition-colors"
-                            >
-                              #{tag}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="p-6 bg-ivory/60 border-l-4 border-l-border/40 border border-border/30 rounded-sm">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-display text-lg sm:text-xl font-semibold text-foreground/50">
-                          {essay.title}
-                        </h4>
-                        <span className="inline-flex items-center gap-1.5 font-sans text-xs text-muted-foreground">
-                          <Clock className="w-3.5 h-3.5" />
-                          Em breve
-                        </span>
-                      </div>
-                      {essay.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5">
-                          {essay.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="inline-block px-2.5 py-1 font-sans text-xs bg-bronze/5 text-bronze/50 rounded-sm"
-                            >
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
+                <EnsaioRow key={essay.id} essay={essay} />
               ))}
             </div>
           </div>
         </FadeIn>
       ))}
     </>
+  );
+}
+
+function EnsaioRow({ essay }: { essay: EnsaioListItem }) {
+  const badge = getStatusBadge(essay.status);
+  const clickable = isClickable(essay.status);
+
+  const titleBlock = (
+    <div className="flex items-start justify-between gap-3 mb-3">
+      <h4
+        className={`font-display text-lg sm:text-xl font-semibold leading-tight ${
+          clickable
+            ? "text-foreground group-hover:text-marsala transition-colors"
+            : "text-foreground/55"
+        }`}
+      >
+        {essay.title}
+      </h4>
+      <div className="flex items-center gap-2 flex-shrink-0">
+        {badge && (
+          <span
+            className={`inline-flex items-center px-2 py-0.5 rounded-sm border font-sans text-[10px] tracking-wide uppercase ${badge.className}`}
+          >
+            {badge.label}
+          </span>
+        )}
+        {clickable && (
+          <ChevronRight className="w-5 h-5 text-marsala group-hover:translate-x-1 transition-all" />
+        )}
+      </div>
+    </div>
+  );
+
+  const tagsBlock = essay.tags.length > 0 && (
+    <div className="flex flex-wrap gap-1.5">
+      {essay.tags.map((tag) =>
+        clickable ? (
+          <Link
+            key={tag}
+            href={`/tag/${tagToSlug(tag)}`}
+            className="inline-block px-2.5 py-1 font-sans text-xs bg-bronze/10 text-bronze/80 hover:bg-marsala hover:text-primary-foreground rounded-sm transition-colors relative z-10"
+          >
+            #{tag}
+          </Link>
+        ) : (
+          <span
+            key={tag}
+            className="inline-block px-2.5 py-1 font-sans text-xs bg-bronze/5 text-bronze/50 rounded-sm"
+          >
+            #{tag}
+          </span>
+        ),
+      )}
+    </div>
+  );
+
+  if (clickable) {
+    return (
+      <div className="relative p-6 bg-ivory border-l-4 border-l-marsala border border-border/60 rounded-sm hover:shadow-lg hover:border-l-marsala-light transition-all duration-300 group">
+        <Link href={`/ensaios/${essay.slug}`} className="absolute inset-0 z-0" aria-label={essay.title} />
+        <div className="relative z-10 pointer-events-none">{titleBlock}</div>
+        {tagsBlock && <div className="relative">{tagsBlock}</div>}
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-6 bg-ivory/60 border-l-4 border-l-border/40 border border-border/30 rounded-sm">
+      {titleBlock}
+      {tagsBlock}
+    </div>
   );
 }

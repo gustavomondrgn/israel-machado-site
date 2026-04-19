@@ -84,7 +84,7 @@ function HeroSection() {
                     Psicoterapia psicanalítica. Atendimento presencial em Passo Fundo e online para todo o Brasil.
                   </p>
                   <p className="font-body text-[0.8rem] text-warm-500 mb-6">
-                    Sessões de 50 minutos · Semanal
+                    Sessões de 1h de duração · Encontros semanais
                   </p>
                   <div className="flex flex-row gap-3">
                     <a

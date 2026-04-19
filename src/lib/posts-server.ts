@@ -1,13 +1,28 @@
 import "server-only";
 import { getPayload } from "@/lib/payload";
 
+export type ArtigoSeriesCycle = {
+  cycleNumber: number;
+  cycleName: string;
+};
+
+export type ArtigoSeriesDoc = {
+  id: number | string;
+  name: string;
+  slug: string;
+  description?: string | null;
+  cycles?: ArtigoSeriesCycle[] | null;
+};
+
 export type ArtigoDoc = {
   id: number | string;
   title: string;
   slug: string;
   excerpt?: string | null;
-  serie?: { id: number | string; name: string; slug: string } | number | string | null;
+  serie?: ArtigoSeriesDoc | number | string | null;
   orderInSerie?: number | null;
+  cycleNumber?: number | null;
+  orderInCycle?: number | null;
   tags?: { tag: string }[] | null;
   content?: unknown;
   notes?: unknown;
@@ -63,6 +78,42 @@ export async function getPublishedArtigos(): Promise<ArtigoDoc[]> {
   }
 }
 
+// Todos os artigos visíveis no site (rascunhos excluídos). Usado pela
+// página /psicologia-cientifica para montar o mapa da série com ciclos,
+// onde artigos em estágios como "briefing", "em breve" etc. aparecem
+// listados com tag de status, ainda que não clicáveis.
+export async function getVisibleArtigos(): Promise<ArtigoDoc[]> {
+  try {
+    const payload = await getPayload();
+    const { docs } = await payload.find({
+      collection: "artigos",
+      where: { status: { not_equals: "draft" } },
+      sort: "orderInCycle",
+      limit: 500,
+      depth: 1,
+    });
+    return docs as ArtigoDoc[];
+  } catch (err) {
+    handlePayloadError("getVisibleArtigos", err);
+    return [];
+  }
+}
+
+export async function getAllArtigoSeries(): Promise<ArtigoSeriesDoc[]> {
+  try {
+    const payload = await getPayload();
+    const { docs } = await payload.find({
+      collection: "artigo-series",
+      sort: "name",
+      limit: 100,
+    });
+    return docs as ArtigoSeriesDoc[];
+  } catch (err) {
+    handlePayloadError("getAllArtigoSeries", err);
+    return [];
+  }
+}
+
 export async function getArtigoBySlug(slug: string): Promise<ArtigoDoc | null> {
   try {
     const payload = await getPayload();
@@ -98,11 +149,14 @@ export async function getPublishedEnsaios(): Promise<EnsaioDoc[]> {
   }
 }
 
+// Lista de ensaios visíveis no site — rascunhos ficam fora. Status
+// diferente de "published" aparece na listagem com tag e sem link.
 export async function getAllEnsaios(): Promise<EnsaioDoc[]> {
   try {
     const payload = await getPayload();
     const { docs } = await payload.find({
       collection: "ensaios",
+      where: { status: { not_equals: "draft" } },
       sort: "title",
       limit: 200,
       depth: 1,

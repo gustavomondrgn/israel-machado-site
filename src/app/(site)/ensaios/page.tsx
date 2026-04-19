@@ -20,7 +20,7 @@ export default async function Ensaios() {
       typeof e.category === "object" && e.category !== null
         ? (e.category as EnsaioCategoryDoc).name
         : "Sem categoria",
-    available: e.status === "published",
+    status: e.status,
     tags: (e.tags ?? []).map((t) => t.tag),
   }));
 

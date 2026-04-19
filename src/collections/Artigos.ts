@@ -29,6 +29,23 @@ export const Artigos: CollectionConfig = {
       admin: { position: "sidebar" },
     },
     {
+      name: "cycleNumber",
+      type: "number",
+      admin: {
+        position: "sidebar",
+        description:
+          "Número do ciclo ao qual o artigo pertence (1, 2, 3...). O nome de cada ciclo é definido na série.",
+      },
+    },
+    {
+      name: "orderInCycle",
+      type: "number",
+      admin: {
+        position: "sidebar",
+        description: "Posição do artigo dentro do ciclo (a1=1, a2=2, etc).",
+      },
+    },
+    {
       name: "tags",
       type: "array",
       fields: [

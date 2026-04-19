@@ -300,6 +300,14 @@ export interface Artigo {
   excerpt?: string | null;
   serie?: (number | null) | ArtigoSery;
   orderInSerie?: number | null;
+  /**
+   * Número do ciclo ao qual o artigo pertence (1, 2, 3...). O nome de cada ciclo é definido na série.
+   */
+  cycleNumber?: number | null;
+  /**
+   * Posição do artigo dentro do ciclo (a1=1, a2=2, etc).
+   */
+  orderInCycle?: number | null;
   tags?:
     | {
         tag: string;
@@ -570,6 +578,8 @@ export interface ArtigosSelect<T extends boolean = true> {
   excerpt?: T;
   serie?: T;
   orderInSerie?: T;
+  cycleNumber?: T;
+  orderInCycle?: T;
   tags?:
     | T
     | {
